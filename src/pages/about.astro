@@ -3,30 +3,72 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Bio & Contatti | Calogero Gebbia">
-  <div class="max-w-2xl space-y-8 py-4">
-    <h1 class="text-3xl font-light tracking-wide text-neutral-100">Chi Sono</h1>
-    
-    <div class="space-y-4 text-neutral-300 leading-relaxed font-light">
-      <p>
-        ERP Specialist con una profonda passione per la fotografia. Esploro il mondo attraverso lo scatto, focalizzandomi su composizione, luce e narrazione visiva.
-      </p>
-      <p class="text-neutral-400 text-sm">
-        La mia ricerca fotografica si concentra sulla geometria degli spazi, i contrasti della luce naturale e la documentazione visiva.
-      </p>
-    </div>
+  <div class="max-w-3xl mx-auto space-y-12">
+    <!-- Intestazione -->
+    <section class="space-y-2 border-b border-neutral-900 pb-6">
+      <h1 class="text-3xl font-light tracking-wide text-neutral-100">Calogero Gebbia</h1>
+      <p class="text-xs font-mono text-neutral-500 uppercase tracking-widest">Fotografo & ERP Specialist</p>
+    </section>
 
-    <div class="pt-8 border-t border-neutral-800 space-y-4">
-      <h2 class="text-sm uppercase tracking-widest text-neutral-400 font-mono">Contatti</h2>
-      <ul class="space-y-2 text-sm">
-        <li>
-          <span class="text-neutral-500 w-20 inline-block">Email:</span>
-          <a href="mailto:info@calogerogebbia.it" class="text-neutral-200 hover:text-white underline underline-offset-4">info@calogerogebbia.it</a>
-        </li>
-        <li>
-          <span class="text-neutral-500 w-20 inline-block">Location:</span>
-          <span class="text-neutral-300">Italia</span>
-        </li>
-      </ul>
-    </div>
+    <!-- Bio principale -->
+    <section class="space-y-6 text-neutral-300 text-sm leading-relaxed font-light">
+      <p>
+        Nato ad Agrigento nel 1994 e milanese d’adozione dal 2018, divido il mio percorso professionale tra il settore IT — dove opero come ERP Specialist e sviluppatore — e una radicata passione per la fotografia di viaggio e di racconto visivo.
+      </p>
+
+      <p>
+        Il mio approccio con la fotografia nasce da un'esigenza precisa: restituire matericità e valore al singolo scatto. Nel 2016, con l'acquisto della mia prima reflex Canon, ho intrapreso un metodo rigoroso che conservo tuttora: selezionare con cura ogni immagine per trasformarla in una stampa fisica, superando la transitività delle gallerie digitali.
+      </p>
+
+      <p>
+        Insieme a mia moglie e compagna di viaggi, esploro contesti urbani, naturali e culturali differenti — dall'Egitto al Portogallo, dalla Francia alla Spagna. Sfrutto l'unione tra la curiosità per il viaggio e la costante ricerca tecnica sullo sviluppo manuale per catturare architetture, paesaggi e dettagli quotidiani che altrimenti sfuggirebbero al tempo.
+      </p>
+    </section>
+
+    <!-- Esperienza e Approccio Tecnico -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-b border-neutral-900 py-8 text-xs font-mono">
+      <div class="space-y-2">
+        <span class="text-neutral-500 uppercase tracking-wider">Inquadratura & Filosofia</span>
+        <p class="text-neutral-300 font-sans font-light text-sm">
+          Scatti ponderati, sviluppo attento della luce e valorizzazione dei dettagli tangibili attraverso la stampa.
+        </p>
+      </div>
+
+      <div class="space-y-2">
+        <span class="text-neutral-500 uppercase tracking-wider">Sfondo Professionale</span>
+        <p class="text-neutral-300 font-sans font-light text-sm">
+          Enterprise Resource Planning (ERP), Web Development, Architettura Dati e Sistemi Informativi.
+        </p>
+      </div>
+    </section>
+
+    <!-- Sezione Contatti / Social -->
+    <section class="space-y-4">
+      <h2 class="text-xs font-mono uppercase tracking-widest text-neutral-400">Contatti & Reti</h2>
+      <div class="flex flex-col sm:flex-row gap-6 text-sm">
+        <a 
+          href="mailto:info@calogerogebbia.it" 
+          class="text-neutral-300 hover:text-white border-b border-neutral-800 hover:border-white pb-1 transition-colors w-fit"
+        >
+          info@calogerogebbia.it
+        </a>
+        <a 
+          href="https://instagram.com" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="text-neutral-300 hover:text-white border-b border-neutral-800 hover:border-white pb-1 transition-colors w-fit"
+        >
+          Instagram ↗
+        </a>
+        <a 
+          href="https://linkedin.com" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="text-neutral-300 hover:text-white border-b border-neutral-800 hover:border-white pb-1 transition-colors w-fit"
+        >
+          LinkedIn ↗
+        </a>
+      </div>
+    </section>
   </div>
 </BaseLayout>
