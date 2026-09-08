@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import exifr from 'exifr';
+import fs from 'node:fs';
+import path from 'node:path';
 
 // Importazione delle foto
 import foto1 from '../assets/IMG_0058.JPG';
@@ -9,17 +11,20 @@ import foto2 from '../assets/IMG_1886.JPG';
 import foto3 from '../assets/IMG_8834.JPG';
 
 const listaFoto = [
-  { src: foto1, title: "Natura", category: "2025 — Nilo, Egitto", alt: "Fotografia di Calogero Gebbia" },
-  { src: foto2, title: "Arte", category: "2025 — Moulin Rouge, Parigi - Francia", alt: "Fotografia di Calogero Gebbia" },
-  { src: foto3, title: "Colori", category: "2024 — Porto, Portogallo", alt: "Fotografia di Calogero Gebbia" }
+  { src: foto1, fileName: 'IMG_0058.JPG', title: "Natura", category: "2025 — Nilo, Egitto", alt: "Fotografia di Calogero Gebbia" },
+  { src: foto2, fileName: 'IMG_1886.JPG', title: "Arte", category: "2025 — Moulin Rouge, Parigi - Francia", alt: "Fotografia di Calogero Gebbia" },
+  { src: foto3, fileName: 'IMG_8834.JPG', title: "Colori", category: "2024 — Porto, Portogallo", alt: "Fotografia di Calogero Gebbia" }
 ];
 
-// Estrazione EXIF automatica in fase di build
+// Estrazione EXIF direttamente dal buffer dei file originali
 const fotografie = await Promise.all(
   listaFoto.map(async (foto) => {
     let exifData = null;
     try {
-      const data = await exifr.parse(foto.src.src, ['Make', 'Model', 'FocalLength', 'FNumber', 'ExposureTime', 'ISO']);
+      const filePath = path.join(process.cwd(), 'src/assets', foto.fileName);
+      const fileBuffer = fs.readFileSync(filePath);
+      const data = await exifr.parse(fileBuffer, ['Make', 'Model', 'FocalLength', 'FNumber', 'ExposureTime', 'ISO']);
+      
       if (data) {
         exifData = {
           camera: data.Model ? `${data.Make || ''} ${data.Model}`.trim() : null,
