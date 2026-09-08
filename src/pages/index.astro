@@ -1,51 +1,60 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+
+// Importazione delle foto dalla cartella assets
+import foto1 from '../assets/IMG_0058.JPG';
+import foto2 from '../assets/IMG_1886.JPG';
+import foto3 from '../assets/IMG_8834.JPG';
+
+// Array con i dati dei tuoi scatti (puoi personalizzare titoli e categorie)
+const fotografie = [
+  {
+    src: foto1,
+    title: "Composizione I",
+    category: "2026 — Serie Fotografica",
+    alt: "Fotografia di Calogero Gebbia"
+  },
+  {
+    src: foto2,
+    title: "Prospettive",
+    category: "2026 — Geometrie",
+    alt: "Fotografia di Calogero Gebbia"
+  },
+  {
+    src: foto3,
+    title: "Luce & Ombra",
+    category: "2026 — Paesaggio",
+    alt: "Fotografia di Calogero Gebbia"
+  }
+];
 ---
 
-<BaseLayout title="Calogero Gebbia | Fotografia">
+<BaseLayout title="Calogero Gebbia | Portfolio Fotografico">
   <section class="space-y-6">
-    <div class="flex justify-between items-end pb-4">
+    <div class="flex justify-between items-end pb-4 border-b border-neutral-900">
       <h1 class="text-2xl font-light tracking-wide text-neutral-200">Selezioni Fotografiche</h1>
       <span class="text-xs text-neutral-500 uppercase tracking-widest font-mono">Portfolio</span>
     </div>
 
     <!-- Griglia Fotografica Responsive -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      
-      <!-- Placeholder Foto 1 -->
-      <div class="group relative aspect-[4/5] bg-neutral-900 rounded-sm overflow-hidden border border-neutral-800/60 cursor-pointer">
-        <div class="absolute inset-0 flex items-center justify-center text-neutral-700 font-mono text-sm group-hover:text-neutral-500 transition-colors">
-          [ Immagine 01 ]
+      {fotografie.map((foto) => (
+        <div class="group relative aspect-[4/5] bg-neutral-900 rounded-sm overflow-hidden border border-neutral-800/60 cursor-pointer">
+          <Image 
+            src={foto.src} 
+            alt={foto.alt}
+            widths={[400, 800, 1200]}
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+          />
+          <!-- Overlay informativo con effetto hover -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end">
+            <span class="text-xs font-mono text-neutral-400">{foto.category}</span>
+            <h2 class="text-sm font-medium text-white tracking-wide mt-1">{foto.title}</h2>
+          </div>
         </div>
-        <!-- Sovrapposizione info al passaggio del mouse -->
-        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end">
-          <span class="text-xs font-mono text-neutral-400">2026 — Serie Progetto</span>
-          <h2 class="text-sm font-medium text-white">Titolo Scatto / Progetto</h2>
-        </div>
-      </div>
-
-      <!-- Placeholder Foto 2 -->
-      <div class="group relative aspect-[4/5] bg-neutral-900 rounded-sm overflow-hidden border border-neutral-800/60 cursor-pointer">
-        <div class="absolute inset-0 flex items-center justify-center text-neutral-700 font-mono text-sm group-hover:text-neutral-500 transition-colors">
-          [ Immagine 02 ]
-        </div>
-        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end">
-          <span class="text-xs font-mono text-neutral-400">2026 — Architettura</span>
-          <h2 class="text-sm font-medium text-white">Luce e Ombra</h2>
-        </div>
-      </div>
-
-      <!-- Placeholder Foto 3 -->
-      <div class="group relative aspect-[4/5] bg-neutral-900 rounded-sm overflow-hidden border border-neutral-800/60 cursor-pointer">
-        <div class="absolute inset-0 flex items-center justify-center text-neutral-700 font-mono text-sm group-hover:text-neutral-500 transition-colors">
-          [ Immagine 03 ]
-        </div>
-        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end">
-          <span class="text-xs font-mono text-neutral-400">2026 — Paesaggio</span>
-          <h2 class="text-sm font-medium text-white">Silenzi</h2>
-        </div>
-      </div>
-
+      ))}
     </div>
   </section>
 </BaseLayout>
