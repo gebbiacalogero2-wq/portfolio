@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import exifr from 'exifr';
+import fs from 'node:fs/promises';
 
 // Importazione foto
 import img_0191 from '../assets/foto/IMG_0191.JPG';
@@ -207,8 +208,10 @@ const fotografie = await Promise.all(
   listaFoto.map(async (foto) => {
     let exifData = null;
     try {
-      if (foto.src && foto.src.src) {
-        const data = await exifr.parse(foto.src.src, ['Make', 'Model', 'FocalLength', 'FNumber', 'ExposureTime', 'ISO']);
+      const filePath = foto.src.fsPath || foto.src.src;
+      if (filePath) {
+        const buffer = await fs.readFile(filePath);
+        const data = await exifr.parse(buffer, ['Make', 'Model', 'FocalLength', 'FNumber', 'ExposureTime', 'ISO']);
 
         if (data) {
           exifData = {
