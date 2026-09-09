@@ -2,10 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import exifr from 'exifr';
-import fs from 'node:fs';
-import path from 'node:path';
 
-// Importazione delle foto dalla cartella src/assets/foto/
+// Importazione foto con estensioni e nomi corretti dalla cartella
 import img_0191 from '../assets/foto/IMG_0191.JPG';
 import img_0165 from '../assets/foto/IMG_0165.JPG';
 import img_0152 from '../assets/foto/IMG_0152.JPG';
@@ -52,9 +50,9 @@ import img_6319 from '../assets/foto/IMG_6319.JPG';
 import img_6382 from '../assets/foto/IMG_6382.JPG';
 import img_6443 from '../assets/foto/IMG_6443.JPG';
 
-import img_6818 from '../assets/foto/IMG_6818.jpeg';
+import img_6810 from '../assets/foto/IMG_6810.jpeg';
 import img_6911 from '../assets/foto/IMG_6911.jpeg';
-import img_6815 from '../assets/foto/IMG_6815.jpeg';
+import img_6915 from '../assets/foto/IMG_6915.jpeg';
 import img_6968 from '../assets/foto/IMG_6968.jpeg';
 import img_7010 from '../assets/foto/IMG_7010.JPG';
 import img_7079 from '../assets/foto/IMG_7079.JPG';
@@ -102,7 +100,6 @@ import img_2515 from '../assets/foto/IMG_2515.JPG';
 import img_2543 from '../assets/foto/IMG_2543.JPG';
 import img_2594 from '../assets/foto/IMG_2594.JPG';
 
-// Categorie / Destinazioni in ordine dal più recente al più vecchio
 const categorie = [
   "Tutte",
   "Val D'Orcia, Toscana",
@@ -176,9 +173,9 @@ const listaFoto = [
   { src: img_7631, fileName: 'IMG_7631.JPG', title: "Scatti", category: "Langhe, Piemonte", subtitle: "Langhe, Piemonte", alt: "Fotografia di Calogero Gebbia" },
 
   // Barcellona, Spagna
-  { src: img_6818, fileName: 'IMG_6818.jpeg', title: "Scatti", category: "Barcellona, Spagna", subtitle: "Barcellona, Spagna", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_6810, fileName: 'IMG_6810.jpeg', title: "Scatti", category: "Barcellona, Spagna", subtitle: "Barcellona, Spagna", alt: "Fotografia di Calogero Gebbia" },
   { src: img_6911, fileName: 'IMG_6911.jpeg', title: "Scatti", category: "Barcellona, Spagna", subtitle: "Barcellona, Spagna", alt: "Fotografia di Calogero Gebbia" },
-  { src: img_6815, fileName: 'IMG_6815.jpeg', title: "Scatti", category: "Barcellona, Spagna", subtitle: "Barcellona, Spagna", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_6915, fileName: 'IMG_6915.jpeg', title: "Scatti", category: "Barcellona, Spagna", subtitle: "Barcellona, Spagna", alt: "Fotografia di Calogero Gebbia" },
   { src: img_6968, fileName: 'IMG_6968.jpeg', title: "Scatti", category: "Barcellona, Spagna", subtitle: "Barcellona, Spagna", alt: "Fotografia di Calogero Gebbia" },
   { src: img_7010, fileName: 'IMG_7010.JPG', title: "Scatti", category: "Barcellona, Spagna", subtitle: "Barcellona, Spagna", alt: "Fotografia di Calogero Gebbia" },
   { src: img_7079, fileName: 'IMG_7079.JPG', title: "Scatti", category: "Barcellona, Spagna", subtitle: "Barcellona, Spagna", alt: "Fotografia di Calogero Gebbia" },
@@ -241,14 +238,12 @@ const listaFoto = [
   { src: img_0144, fileName: 'IMG_0144.JPG', title: "Scatti", category: "Agrigento", subtitle: "Agrigento", alt: "Fotografia di Calogero Gebbia" }
 ];
 
-// Estrazione EXIF automatica dal buffer locale
+// Estrazione EXIF sicura compatibile con Vercel
 const fotografie = await Promise.all(
   listaFoto.map(async (foto) => {
     let exifData = null;
     try {
-      const filePath = path.join(process.cwd(), 'src/assets/foto', foto.fileName);
-      const fileBuffer = fs.readFileSync(filePath);
-      const data = await exifr.parse(fileBuffer, ['Make', 'Model', 'FocalLength', 'FNumber', 'ExposureTime', 'ISO']);
+      const data = await exifr.parse(foto.src.src, ['Make', 'Model', 'FocalLength', 'FNumber', 'ExposureTime', 'ISO']);
       
       if (data) {
         exifData = {
