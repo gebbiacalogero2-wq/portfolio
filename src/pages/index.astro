@@ -2,8 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import exifr from 'exifr';
+import fs from 'node:fs';
 
-// Importazione foto con estensioni e nomi corretti dalla cartella
+// Importazione foto
 import img_0191 from '../assets/foto/IMG_0191.JPG';
 import img_0165 from '../assets/foto/IMG_0165.JPG';
 import img_0152 from '../assets/foto/IMG_0152.JPG';
@@ -238,26 +239,38 @@ const listaFoto = [
   { src: img_0144, fileName: 'IMG_0144.JPG', title: "Scatti", category: "Agrigento", subtitle: "Agrigento", alt: "Fotografia di Calogero Gebbia" }
 ];
 
-// Estrazione EXIF sicura compatibile con Vercel
+// Estrazione EXIF lato server leggendo il file Buffer direttamente in build
 const fotografie = await Promise.all(
   listaFoto.map(async (foto) => {
     let exifData = null;
     try {
-      const data = await exifr.parse(foto.src.src, ['Make', 'Model', 'FocalLength', 'FNumber', 'ExposureTime', 'ISO']);
-      
-      if (data) {
-        exifData = {
-          camera: data.Model ? `${data.Make || ''} ${data.Model}`.trim() : null,
-          focal: data.FocalLength ? `${data.FocalLength}mm` : null,
-          aperture: data.FNumber ? `f/${data.FNumber}` : null,
-          shutter: data.ExposureTime ? (data.ExposureTime < 1 ? `1/${Math.round(1 / data.ExposureTime)}s` : `${data.ExposureTime}s`) : null,
-          iso: data.ISO ? `ISO ${data.ISO}` : null
-        };
+      const filePath = `./src/assets/foto/${foto.fileName}`;
+      if (fs.existsSync(filePath)) {
+        const buffer = fs.readFileSync(filePath);
+        const data = await exifr.parse(buffer, ['Make', 'Model', 'FocalLength', 'FNumber', 'ExposureTime', 'ISO']);
+
+        if (data) {
+          exifData = {
+            camera: data.Model ? `${data.Make || ''} ${data.Model}`.trim() : null,
+            focal: data.FocalLength ? `${data.FocalLength}mm` : null,
+            aperture: data.FNumber ? `f/${data.FNumber}` : null,
+            shutter: data.ExposureTime ? (data.ExposureTime < 1 ? `1/${Math.round(1 / data.ExposureTime)}s` : `${data.ExposureTime}s`) : null,
+            iso: data.ISO ? `ISO ${data.ISO}` : null
+          };
+        }
       }
     } catch (e) {
       exifData = null;
     }
-    return { ...foto, exif: exifData };
+    return {
+      srcUrl: foto.src.src,
+      title: foto.title,
+      category: foto.category,
+      subtitle: foto.subtitle,
+      alt: foto.alt,
+      srcObj: foto.src,
+      exif: exifData
+    };
   })
 );
 ---
@@ -294,7 +307,7 @@ const fotografie = await Promise.all(
           data-category={foto.category}
         >
           <Image 
-            src={foto.src} 
+            src={foto.srcObj} 
             alt={foto.alt}
             widths={[400, 800, 1200]}
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -325,7 +338,7 @@ const fotografie = await Promise.all(
 
     <!-- Dettagli EXIF -->
     <div class="p-6 text-center text-xs font-mono text-neutral-400 border-t border-neutral-900 bg-black/40">
-      <p id="modal-exif">Caricamento parametri di scatto...</p>
+      <p id="modal-exif"></p>
     </div>
   </dialog>
 
@@ -343,7 +356,7 @@ const fotografie = await Promise.all(
         const index = card.getAttribute('data-index');
         const item = fotografie[index];
 
-        modalImg.src = item.src.src;
+        modalImg.src = item.srcUrl;
         modalTitle.textContent = item.title;
         modalCategory.textContent = item.subtitle;
 
@@ -377,14 +390,12 @@ const fotografie = await Promise.all(
       btn.addEventListener('click', () => {
         const selectedCategory = btn.getAttribute('data-category');
 
-        // Aggiorna stile bottoni
         filterButtons.forEach(b => {
           b.classList.remove('bg-neutral-200', 'text-black', 'border-neutral-200');
           b.classList.add('border-neutral-800', 'text-neutral-400');
         });
         btn.classList.add('bg-neutral-200', 'text-black', 'border-neutral-200');
 
-        // Filtra schede della griglia
         photoCards.forEach(card => {
           const cardCategory = card.getAttribute('data-category');
           if (selectedCategory === 'Tutte' || cardCategory === selectedCategory) {
