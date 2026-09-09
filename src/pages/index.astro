@@ -286,8 +286,7 @@ const fotografie = await Promise.all(
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end">
-            <span class="text-xs font-mono text-neutral-400">{foto.subtitle}</span>
-            <h2 class="text-sm font-medium text-white tracking-wide mt-1">{foto.title}</h2>
+            <span class="text-sm font-medium text-white tracking-wide">{foto.subtitle}</span>
           </div>
         </div>
       ))}
@@ -298,7 +297,6 @@ const fotografie = await Promise.all(
     <div class="p-6 flex justify-between items-center text-white w-full">
       <div id="modal-header">
         <h3 id="modal-title" class="text-lg font-light tracking-wide"></h3>
-        <p id="modal-category" class="text-xs font-mono text-neutral-400"></p>
       </div>
       <button id="close-modal" class="text-neutral-400 hover:text-white text-2xl font-mono p-2">&times;</button>
     </div>
@@ -316,7 +314,6 @@ const fotografie = await Promise.all(
     const modal = document.getElementById('photo-modal');
     const modalImg = document.getElementById('modal-img');
     const modalTitle = document.getElementById('modal-title');
-    const modalCategory = document.getElementById('modal-category');
     const modalExif = document.getElementById('modal-exif');
     const closeBtn = document.getElementById('close-modal');
 
@@ -326,8 +323,7 @@ const fotografie = await Promise.all(
         const item = fotografie[index];
 
         modalImg.src = item.srcUrl;
-        modalTitle.textContent = item.title;
-        modalCategory.textContent = item.subtitle;
+        modalTitle.textContent = item.subtitle;
 
         if (item.exif) {
           const details = [item.exif.camera, item.exif.focal, item.exif.aperture, item.exif.shutter, item.exif.iso].filter(Boolean);
