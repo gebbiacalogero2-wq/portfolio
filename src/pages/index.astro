@@ -5,23 +5,248 @@ import exifr from 'exifr';
 import fs from 'node:fs';
 import path from 'node:path';
 
-// Importazione delle foto
-import foto1 from '../assets/IMG_0058.JPG';
-import foto2 from '../assets/IMG_1886.JPG';
-import foto3 from '../assets/IMG_8834.JPG';
+// Importazione delle foto dalla cartella src/assets/foto/
+import img_0191 from '../assets/foto/IMG_0191.JPG';
+import img_0165 from '../assets/foto/IMG_0165.JPG';
+import img_0152 from '../assets/foto/IMG_0152.JPG';
+import img_0144 from '../assets/foto/IMG_0144.JPG';
 
-const listaFoto = [
-  { src: foto1, fileName: 'IMG_0058.JPG', title: "Natura", category: "2025 — Nilo, Egitto", alt: "Fotografia di Calogero Gebbia" },
-  { src: foto2, fileName: 'IMG_1886.JPG', title: "Arte", category: "2025 — Moulin Rouge, Parigi - Francia", alt: "Fotografia di Calogero Gebbia" },
-  { src: foto3, fileName: 'IMG_8834.JPG', title: "Colori", category: "2024 — Porto, Portogallo", alt: "Fotografia di Calogero Gebbia" }
+import img_1545 from '../assets/foto/IMG_1545.JPG';
+import img_1564 from '../assets/foto/IMG_1564.jpeg';
+
+import img_1960 from '../assets/foto/IMG_1960.JPG';
+import img_2128 from '../assets/foto/IMG_2128.JPG';
+import img_2254 from '../assets/foto/IMG_2254.jpeg';
+import img_2562 from '../assets/foto/IMG_2562.jpeg';
+
+import img_3383 from '../assets/foto/IMG_3383.JPG';
+import img_3342 from '../assets/foto/IMG_3342.JPG';
+import img_3292 from '../assets/foto/IMG_3292.jpeg';
+
+import img_4101 from '../assets/foto/IMG_4101.JPG';
+import img_3812 from '../assets/foto/IMG_3812.jpeg';
+import img_4019 from '../assets/foto/IMG_4019.JPG';
+
+import img_4299 from '../assets/foto/IMG_4299.JPG';
+import img_4307 from '../assets/foto/IMG_4307.jpeg';
+import img_4325 from '../assets/foto/IMG_4325.JPG';
+
+import img_4467 from '../assets/foto/IMG_4467.JPG';
+import img_4476 from '../assets/foto/IMG_4476.JPG';
+import img_4602 from '../assets/foto/IMG_4602.JPG';
+import img_4609 from '../assets/foto/IMG_4609.JPG';
+
+import img_5282 from '../assets/foto/IMG_5282.jpeg';
+import img_5189 from '../assets/foto/IMG_5189.jpeg';
+import img_4785 from '../assets/foto/IMG_4785.jpeg';
+
+import img_5325 from '../assets/foto/IMG_5325.JPG';
+import img_5471 from '../assets/foto/IMG_5471.JPG';
+import img_5569 from '../assets/foto/IMG_5569.JPG';
+import img_5604 from '../assets/foto/IMG_5604.JPG';
+
+import img_5826 from '../assets/foto/IMG_5826.JPG';
+import img_5948 from '../assets/foto/IMG_5948.jpeg';
+import img_6117 from '../assets/foto/IMG_6117.JPG';
+import img_6319 from '../assets/foto/IMG_6319.JPG';
+import img_6382 from '../assets/foto/IMG_6382.JPG';
+import img_6443 from '../assets/foto/IMG_6443.JPG';
+
+import img_6818 from '../assets/foto/IMG_6818.jpeg';
+import img_6911 from '../assets/foto/IMG_6911.jpeg';
+import img_6815 from '../assets/foto/IMG_6815.jpeg';
+import img_6968 from '../assets/foto/IMG_6968.jpeg';
+import img_7010 from '../assets/foto/IMG_7010.JPG';
+import img_7079 from '../assets/foto/IMG_7079.JPG';
+import img_7088 from '../assets/foto/IMG_7088.jpeg';
+
+import img_7433 from '../assets/foto/IMG_7433.jpeg';
+import img_7520 from '../assets/foto/IMG_7520.jpeg';
+import img_7631 from '../assets/foto/IMG_7631.JPG';
+
+import img_8242 from '../assets/foto/IMG_8242.JPG';
+import img_8286 from '../assets/foto/IMG_8286.jpeg';
+import img_8461 from '../assets/foto/IMG_8461.JPG';
+import img_8526 from '../assets/foto/IMG_8526.JPG';
+import img_8571 from '../assets/foto/IMG_8571.jpeg';
+import img_8956 from '../assets/foto/IMG_8956.JPG';
+import img_8834 from '../assets/foto/IMG_8834.JPG';
+
+import img_9042 from '../assets/foto/IMG_9042.JPG';
+import img_9117 from '../assets/foto/IMG_9117.JPG';
+import img_9225 from '../assets/foto/IMG_9225.jpeg';
+
+import img_0058 from '../assets/foto/IMG_0058.JPG';
+import img_0183 from '../assets/foto/IMG_0183.JPG';
+import img_0228 from '../assets/foto/IMG_0228.JPG';
+import img_0463 from '../assets/foto/IMG_0463.JPG';
+import img_0981 from '../assets/foto/IMG_0981.JPG';
+import img_1076 from '../assets/foto/IMG_1076.JPG';
+import img_9885 from '../assets/foto/IMG_9885.JPG';
+import img_9952 from '../assets/foto/IMG_9952.JPG';
+
+import img_1259 from '../assets/foto/IMG_1259.JPG';
+import img_1507 from '../assets/foto/IMG_1507.JPG';
+import img_1661 from '../assets/foto/IMG_1661.JPG';
+import img_1886 from '../assets/foto/IMG_1886.JPG';
+
+import img_1913 from '../assets/foto/IMG_1913.JPG';
+import img_2087 from '../assets/foto/IMG_2087.JPG';
+import img_2116 from '../assets/foto/IMG_2116.JPG';
+import img_2195 from '../assets/foto/IMG_2195.JPG';
+import img_2250 from '../assets/foto/IMG_2250.JPG';
+import img_2302 from '../assets/foto/IMG_2302.JPG';
+
+import img_2499 from '../assets/foto/IMG_2499.JPG';
+import img_2515 from '../assets/foto/IMG_2515.JPG';
+import img_2543 from '../assets/foto/IMG_2543.JPG';
+import img_2594 from '../assets/foto/IMG_2594.JPG';
+
+// Categorie / Destinazioni in ordine dal più recente al più vecchio
+const categorie = [
+  "Tutte",
+  "Val D'Orcia, Toscana",
+  "Strasburgo & Colmar",
+  "Parigi, Francia",
+  "Egitto",
+  "Venezia, Veneto",
+  "Lisbona & Porto, Portogallo",
+  "Langhe, Piemonte",
+  "Barcellona, Spagna",
+  "Bruxelles & Bruges, Belgio",
+  "Ferrara & Modena, Emilia Romagna",
+  "St. Moritz, Svizzera",
+  "Capri, Napoli",
+  "Costiera Amalfitana, Salerno",
+  "Matera, Basilicata",
+  "Varenna, Lecco",
+  "Monaco di Baviera, Germania",
+  "Mazara del Vallo & Marsala, Trapani",
+  "Agrigento"
 ];
 
-// Estrazione EXIF direttamente dal buffer dei file originali
+const listaFoto = [
+  // Val D'Orcia, Toscana
+  { src: img_2499, fileName: 'IMG_2499.JPG', title: "Scatti", category: "Val D'Orcia, Toscana", subtitle: "Val D'Orcia, Toscana", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_2515, fileName: 'IMG_2515.JPG', title: "Scatti", category: "Val D'Orcia, Toscana", subtitle: "Val D'Orcia, Toscana", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_2543, fileName: 'IMG_2543.JPG', title: "Scatti", category: "Val D'Orcia, Toscana", subtitle: "Val D'Orcia, Toscana", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_2594, fileName: 'IMG_2594.JPG', title: "Scatti", category: "Val D'Orcia, Toscana", subtitle: "Val D'Orcia, Toscana", alt: "Fotografia di Calogero Gebbia" },
+
+  // Strasburgo & Colmar
+  { src: img_1913, fileName: 'IMG_1913.JPG', title: "Scatti", category: "Strasburgo & Colmar", subtitle: "Strasburgo & Colmar", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_2087, fileName: 'IMG_2087.JPG', title: "Scatti", category: "Strasburgo & Colmar", subtitle: "Strasburgo & Colmar", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_2116, fileName: 'IMG_2116.JPG', title: "Scatti", category: "Strasburgo & Colmar", subtitle: "Strasburgo & Colmar", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_2195, fileName: 'IMG_2195.JPG', title: "Scatti", category: "Strasburgo & Colmar", subtitle: "Strasburgo & Colmar", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_2250, fileName: 'IMG_2250.JPG', title: "Scatti", category: "Strasburgo & Colmar", subtitle: "Strasburgo & Colmar", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_2302, fileName: 'IMG_2302.JPG', title: "Scatti", category: "Strasburgo & Colmar", subtitle: "Strasburgo & Colmar", alt: "Fotografia di Calogero Gebbia" },
+
+  // Parigi, Francia
+  { src: img_1259, fileName: 'IMG_1259.JPG', title: "Scatti", category: "Parigi, Francia", subtitle: "Parigi, Francia", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_1507, fileName: 'IMG_1507.JPG', title: "Scatti", category: "Parigi, Francia", subtitle: "Parigi, Francia", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_1661, fileName: 'IMG_1661.JPG', title: "Scatti", category: "Parigi, Francia", subtitle: "Parigi, Francia", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_1886, fileName: 'IMG_1886.JPG', title: "Arte", category: "Parigi, Francia", subtitle: "Parigi, Francia", alt: "Fotografia di Calogero Gebbia" },
+
+  // Egitto
+  { src: img_0058, fileName: 'IMG_0058.JPG', title: "Natura", category: "Egitto", subtitle: "Nilo, Egitto", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_0183, fileName: 'IMG_0183.JPG', title: "Scatti", category: "Egitto", subtitle: "Egitto", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_0228, fileName: 'IMG_0228.JPG', title: "Scatti", category: "Egitto", subtitle: "Egitto", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_0463, fileName: 'IMG_0463.JPG', title: "Scatti", category: "Egitto", subtitle: "Egitto", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_0981, fileName: 'IMG_0981.JPG', title: "Scatti", category: "Egitto", subtitle: "Egitto", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_1076, fileName: 'IMG_1076.JPG', title: "Scatti", category: "Egitto", subtitle: "Egitto", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_9885, fileName: 'IMG_9885.JPG', title: "Scatti", category: "Egitto", subtitle: "Egitto", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_9952, fileName: 'IMG_9952.JPG', title: "Scatti", category: "Egitto", subtitle: "Egitto", alt: "Fotografia di Calogero Gebbia" },
+
+  // Venezia, Veneto
+  { src: img_9042, fileName: 'IMG_9042.JPG', title: "Scatti", category: "Venezia, Veneto", subtitle: "Venezia, Veneto", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_9117, fileName: 'IMG_9117.JPG', title: "Scatti", category: "Venezia, Veneto", subtitle: "Venezia, Veneto", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_9225, fileName: 'IMG_9225.jpeg', title: "Scatti", category: "Venezia, Veneto", subtitle: "Venezia, Veneto", alt: "Fotografia di Calogero Gebbia" },
+
+  // Lisbona & Porto, Portogallo
+  { src: img_8242, fileName: 'IMG_8242.JPG', title: "Scatti", category: "Lisbona & Porto, Portogallo", subtitle: "Lisbona & Porto, Portogallo", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_8286, fileName: 'IMG_8286.jpeg', title: "Scatti", category: "Lisbona & Porto, Portogallo", subtitle: "Lisbona & Porto, Portogallo", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_8461, fileName: 'IMG_8461.JPG', title: "Scatti", category: "Lisbona & Porto, Portogallo", subtitle: "Lisbona & Porto, Portogallo", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_8526, fileName: 'IMG_8526.JPG', title: "Scatti", category: "Lisbona & Porto, Portogallo", subtitle: "Lisbona & Porto, Portogallo", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_8571, fileName: 'IMG_8571.jpeg', title: "Scatti", category: "Lisbona & Porto, Portogallo", subtitle: "Lisbona & Porto, Portogallo", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_8956, fileName: 'IMG_8956.JPG', title: "Scatti", category: "Lisbona & Porto, Portogallo", subtitle: "Lisbona & Porto, Portogallo", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_8834, fileName: 'IMG_8834.JPG', title: "Colori", category: "Lisbona & Porto, Portogallo", subtitle: "Porto, Portogallo", alt: "Fotografia di Calogero Gebbia" },
+
+  // Langhe, Piemonte
+  { src: img_7433, fileName: 'IMG_7433.jpeg', title: "Scatti", category: "Langhe, Piemonte", subtitle: "Langhe, Piemonte", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_7520, fileName: 'IMG_7520.jpeg', title: "Scatti", category: "Langhe, Piemonte", subtitle: "Langhe, Piemonte", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_7631, fileName: 'IMG_7631.JPG', title: "Scatti", category: "Langhe, Piemonte", subtitle: "Langhe, Piemonte", alt: "Fotografia di Calogero Gebbia" },
+
+  // Barcellona, Spagna
+  { src: img_6818, fileName: 'IMG_6818.jpeg', title: "Scatti", category: "Barcellona, Spagna", subtitle: "Barcellona, Spagna", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_6911, fileName: 'IMG_6911.jpeg', title: "Scatti", category: "Barcellona, Spagna", subtitle: "Barcellona, Spagna", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_6815, fileName: 'IMG_6815.jpeg', title: "Scatti", category: "Barcellona, Spagna", subtitle: "Barcellona, Spagna", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_6968, fileName: 'IMG_6968.jpeg', title: "Scatti", category: "Barcellona, Spagna", subtitle: "Barcellona, Spagna", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_7010, fileName: 'IMG_7010.JPG', title: "Scatti", category: "Barcellona, Spagna", subtitle: "Barcellona, Spagna", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_7079, fileName: 'IMG_7079.JPG', title: "Scatti", category: "Barcellona, Spagna", subtitle: "Barcellona, Spagna", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_7088, fileName: 'IMG_7088.jpeg', title: "Scatti", category: "Barcellona, Spagna", subtitle: "Barcellona, Spagna", alt: "Fotografia di Calogero Gebbia" },
+
+  // Bruxelles & Bruges, Belgio
+  { src: img_5826, fileName: 'IMG_5826.JPG', title: "Scatti", category: "Bruxelles & Bruges, Belgio", subtitle: "Bruxelles & Bruges, Belgio", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_5948, fileName: 'IMG_5948.jpeg', title: "Scatti", category: "Bruxelles & Bruges, Belgio", subtitle: "Bruxelles & Bruges, Belgio", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_6117, fileName: 'IMG_6117.JPG', title: "Scatti", category: "Bruxelles & Bruges, Belgio", subtitle: "Bruxelles & Bruges, Belgio", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_6319, fileName: 'IMG_6319.JPG', title: "Scatti", category: "Bruxelles & Bruges, Belgio", subtitle: "Bruxelles & Bruges, Belgio", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_6382, fileName: 'IMG_6382.JPG', title: "Scatti", category: "Bruxelles & Bruges, Belgio", subtitle: "Bruxelles & Bruges, Belgio", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_6443, fileName: 'IMG_6443.JPG', title: "Scatti", category: "Bruxelles & Bruges, Belgio", subtitle: "Bruxelles & Bruges, Belgio", alt: "Fotografia di Calogero Gebbia" },
+
+  // Ferrara & Modena, Emilia Romagna
+  { src: img_5325, fileName: 'IMG_5325.JPG', title: "Scatti", category: "Ferrara & Modena, Emilia Romagna", subtitle: "Ferrara & Modena, Emilia Romagna", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_5471, fileName: 'IMG_5471.JPG', title: "Scatti", category: "Ferrara & Modena, Emilia Romagna", subtitle: "Ferrara & Modena, Emilia Romagna", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_5569, fileName: 'IMG_5569.JPG', title: "Scatti", category: "Ferrara & Modena, Emilia Romagna", subtitle: "Ferrara & Modena, Emilia Romagna", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_5604, fileName: 'IMG_5604.JPG', title: "Scatti", category: "Ferrara & Modena, Emilia Romagna", subtitle: "Ferrara & Modena, Emilia Romagna", alt: "Fotografia di Calogero Gebbia" },
+
+  // St. Moritz, Svizzera
+  { src: img_5282, fileName: 'IMG_5282.jpeg', title: "Scatti", category: "St. Moritz, Svizzera", subtitle: "St. Moritz, Svizzera", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_5189, fileName: 'IMG_5189.jpeg', title: "Scatti", category: "St. Moritz, Svizzera", subtitle: "St. Moritz, Svizzera", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_4785, fileName: 'IMG_4785.jpeg', title: "Scatti", category: "St. Moritz, Svizzera", subtitle: "St. Moritz, Svizzera", alt: "Fotografia di Calogero Gebbia" },
+
+  // Capri, Napoli
+  { src: img_4467, fileName: 'IMG_4467.JPG', title: "Scatti", category: "Capri, Napoli", subtitle: "Capri, Napoli", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_4476, fileName: 'IMG_4476.JPG', title: "Scatti", category: "Capri, Napoli", subtitle: "Capri, Napoli", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_4602, fileName: 'IMG_4602.JPG', title: "Scatti", category: "Capri, Napoli", subtitle: "Capri, Napoli", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_4609, fileName: 'IMG_4609.JPG', title: "Scatti", category: "Capri, Napoli", subtitle: "Capri, Napoli", alt: "Fotografia di Calogero Gebbia" },
+
+  // Costiera Amalfitana, Salerno
+  { src: img_4299, fileName: 'IMG_4299.JPG', title: "Scatti", category: "Costiera Amalfitana, Salerno", subtitle: "Costiera Amalfitana, Salerno", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_4307, fileName: 'IMG_4307.jpeg', title: "Scatti", category: "Costiera Amalfitana, Salerno", subtitle: "Costiera Amalfitana, Salerno", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_4325, fileName: 'IMG_4325.JPG', title: "Scatti", category: "Costiera Amalfitana, Salerno", subtitle: "Costiera Amalfitana, Salerno", alt: "Fotografia di Calogero Gebbia" },
+
+  // Matera, Basilicata
+  { src: img_4101, fileName: 'IMG_4101.JPG', title: "Scatti", category: "Matera, Basilicata", subtitle: "Matera, Basilicata", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_3812, fileName: 'IMG_3812.jpeg', title: "Scatti", category: "Matera, Basilicata", subtitle: "Matera, Basilicata", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_4019, fileName: 'IMG_4019.JPG', title: "Scatti", category: "Matera, Basilicata", subtitle: "Matera, Basilicata", alt: "Fotografia di Calogero Gebbia" },
+
+  // Varenna, Lecco
+  { src: img_3383, fileName: 'IMG_3383.JPG', title: "Scatti", category: "Varenna, Lecco", subtitle: "Varenna, Lecco", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_3342, fileName: 'IMG_3342.JPG', title: "Scatti", category: "Varenna, Lecco", subtitle: "Varenna, Lecco", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_3292, fileName: 'IMG_3292.jpeg', title: "Scatti", category: "Varenna, Lecco", subtitle: "Varenna, Lecco", alt: "Fotografia di Calogero Gebbia" },
+
+  // Monaco di Baviera, Germania
+  { src: img_1960, fileName: 'IMG_1960.JPG', title: "Scatti", category: "Monaco di Baviera, Germania", subtitle: "Monaco di Baviera, Germania", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_2128, fileName: 'IMG_2128.JPG', title: "Scatti", category: "Monaco di Baviera, Germania", subtitle: "Monaco di Baviera, Germania", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_2254, fileName: 'IMG_2254.jpeg', title: "Scatti", category: "Monaco di Baviera, Germania", subtitle: "Monaco di Baviera, Germania", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_2562, fileName: 'IMG_2562.jpeg', title: "Scatti", category: "Monaco di Baviera, Germania", subtitle: "Monaco di Baviera, Germania", alt: "Fotografia di Calogero Gebbia" },
+
+  // Mazara del Vallo & Marsala, Trapani
+  { src: img_1545, fileName: 'IMG_1545.JPG', title: "Scatti", category: "Mazara del Vallo & Marsala, Trapani", subtitle: "Mazara del Vallo & Marsala, Trapani", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_1564, fileName: 'IMG_1564.jpeg', title: "Scatti", category: "Mazara del Vallo & Marsala, Trapani", subtitle: "Mazara del Vallo & Marsala, Trapani", alt: "Fotografia di Calogero Gebbia" },
+
+  // Agrigento
+  { src: img_0191, fileName: 'IMG_0191.JPG', title: "Scatti", category: "Agrigento", subtitle: "Agrigento", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_0165, fileName: 'IMG_0165.JPG', title: "Scatti", category: "Agrigento", subtitle: "Agrigento", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_0152, fileName: 'IMG_0152.JPG', title: "Scatti", category: "Agrigento", subtitle: "Agrigento", alt: "Fotografia di Calogero Gebbia" },
+  { src: img_0144, fileName: 'IMG_0144.JPG', title: "Scatti", category: "Agrigento", subtitle: "Agrigento", alt: "Fotografia di Calogero Gebbia" }
+];
+
+// Estrazione EXIF automatica dal buffer locale
 const fotografie = await Promise.all(
   listaFoto.map(async (foto) => {
     let exifData = null;
     try {
-      const filePath = path.join(process.cwd(), 'src/assets', foto.fileName);
+      const filePath = path.join(process.cwd(), 'src/assets/foto', foto.fileName);
       const fileBuffer = fs.readFileSync(filePath);
       const data = await exifr.parse(fileBuffer, ['Make', 'Model', 'FocalLength', 'FNumber', 'ExposureTime', 'ISO']);
       
@@ -49,12 +274,29 @@ const fotografie = await Promise.all(
       <span class="text-xs text-neutral-500 uppercase tracking-widest font-mono">Portfolio</span>
     </div>
 
+    <!-- Barra dei filtri per Categoria / Luogo -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none text-xs font-mono">
+      {categorie.map((cat, idx) => (
+        <button
+          class={`filter-btn whitespace-nowrap px-3 py-1.5 rounded-full border transition-colors ${
+            idx === 0 
+              ? 'bg-neutral-200 text-black border-neutral-200' 
+              : 'border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-700'
+          }`}
+          data-category={cat}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
     <!-- Griglia Fotografica -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div id="photo-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {fotografie.map((foto, index) => (
         <div 
           class="group relative aspect-[4/5] bg-neutral-900 rounded-sm overflow-hidden border border-neutral-800/60 cursor-pointer photo-card"
           data-index={index}
+          data-category={foto.category}
         >
           <Image 
             src={foto.src} 
@@ -64,7 +306,7 @@ const fotografie = await Promise.all(
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end">
-            <span class="text-xs font-mono text-neutral-400">{foto.category}</span>
+            <span class="text-xs font-mono text-neutral-400">{foto.subtitle}</span>
             <h2 class="text-sm font-medium text-white tracking-wide mt-1">{foto.title}</h2>
           </div>
         </div>
@@ -100,6 +342,7 @@ const fotografie = await Promise.all(
     const modalExif = document.getElementById('modal-exif');
     const closeBtn = document.getElementById('close-modal');
 
+    // Gestione aperture Lightbox
     document.querySelectorAll('.photo-card').forEach(card => {
       card.addEventListener('click', () => {
         const index = card.getAttribute('data-index');
@@ -107,7 +350,7 @@ const fotografie = await Promise.all(
 
         modalImg.src = item.src.src;
         modalTitle.textContent = item.title;
-        modalCategory.textContent = item.category;
+        modalCategory.textContent = item.subtitle;
 
         if (item.exif) {
           const details = [item.exif.camera, item.exif.focal, item.exif.aperture, item.exif.shutter, item.exif.iso].filter(Boolean);
@@ -130,5 +373,32 @@ const fotografie = await Promise.all(
 
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+    // Gestione Filtro Categorie
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const photoCards = document.querySelectorAll('.photo-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const selectedCategory = btn.getAttribute('data-category');
+
+        // Aggiorna stile bottoni
+        filterButtons.forEach(b => {
+          b.classList.remove('bg-neutral-200', 'text-black', 'border-neutral-200');
+          b.classList.add('border-neutral-800', 'text-neutral-400');
+        });
+        btn.classList.add('bg-neutral-200', 'text-black', 'border-neutral-200');
+
+        // Filtra schede della griglia
+        photoCards.forEach(card => {
+          const cardCategory = card.getAttribute('data-category');
+          if (selectedCategory === 'Tutte' || cardCategory === selectedCategory) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
   </script>
 </BaseLayout>
