@@ -2,18 +2,56 @@
 import '../styles/global.css';
 
 interface Props {
-  title: string;
+  title?: string;
+  description?: string;
+  image?: string;
 }
 
-const { title } = Astro.props;
+const { 
+  title = "Calogero Gebbia | Portfolio Fotografico",
+  description = "Esplora il portfolio fotografico di Calogero Gebbia. Scatti di viaggio, natura e architettura.",
+  image = "/og-image.jpg"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
 ---
 
 <html lang="it">
   <head>
     <meta charset="utf-8" />
-   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+
+    <!-- SEO Base -->
     <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / WhatsApp / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site || Astro.url)} />
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.site || Astro.url)} />
+
+    <!-- Dati Strutturati JSON-LD per Google -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Calogero Gebbia",
+      "url": Astro.site,
+      "jobTitle": "Fotografo",
+      "image": new URL(image, Astro.site || Astro.url).toString(),
+      "sameAs": []
+    })} />
   </head>
   <body class="bg-neutral-950 text-neutral-100 min-h-screen font-sans antialiased flex flex-col">
     <!-- Header / Navigazione -->
