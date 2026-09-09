@@ -10,7 +10,7 @@ interface Props {
 const { 
   title = "Calogero Gebbia | Portfolio Fotografico",
   description = "Esplora il portfolio fotografico di Calogero Gebbia. Scatti di viaggio, natura e architettura.",
-  image = "/og-image.jpg"
+  image = "/favicon.svg"
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
@@ -36,7 +36,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
     <meta property="og:image" content={new URL(image, Astro.site || Astro.url)} />
 
     <!-- Twitter Card -->
-    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:card" content="summary" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
