@@ -1,7 +1,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import exifr from 'exifr';
-import fs from 'node:fs';
 
 // Importazione foto
 import img_0191 from '../assets/foto/IMG_0191.JPG';
@@ -238,25 +237,22 @@ const listaFoto = [
   { src: img_0144, fileName: 'IMG_0144.JPG', title: "Scatti", category: "Agrigento", subtitle: "Agrigento", alt: "Fotografia di Calogero Gebbia" }
 ];
 
-// Estrazione EXIF lato server leggendo il file Buffer direttamente in build
+// Estrazione EXIF lato server compatibile con Vercel
 const fotografie = await Promise.all(
   listaFoto.map(async (foto) => {
     let exifData = null;
     try {
-      const filePath = `./src/assets/foto/${foto.fileName}`;
-      if (fs.existsSync(filePath)) {
-        const buffer = fs.readFileSync(filePath);
-        const data = await exifr.parse(buffer, ['Make', 'Model', 'FocalLength', 'FNumber', 'ExposureTime', 'ISO']);
+      const target = foto.src.fsPath || foto.src.src;
+      const data = await exifr.parse(target, ['Make', 'Model', 'FocalLength', 'FNumber', 'ExposureTime', 'ISO']);
 
-        if (data) {
-          exifData = {
-            camera: data.Model ? `${data.Make || ''} ${data.Model}`.trim() : null,
-            focal: data.FocalLength ? `${data.FocalLength}mm` : null,
-            aperture: data.FNumber ? `f/${data.FNumber}` : null,
-            shutter: data.ExposureTime ? (data.ExposureTime < 1 ? `1/${Math.round(1 / data.ExposureTime)}s` : `${data.ExposureTime}s`) : null,
-            iso: data.ISO ? `ISO ${data.ISO}` : null
-          };
-        }
+      if (data) {
+        exifData = {
+          camera: data.Model ? `${data.Make || ''} ${data.Model}`.trim() : null,
+          focal: data.FocalLength ? `${data.FocalLength}mm` : null,
+          aperture: data.FNumber ? `f/${data.FNumber}` : null,
+          shutter: data.ExposureTime ? (data.ExposureTime < 1 ? `1/${Math.round(1 / data.ExposureTime)}s` : `${data.ExposureTime}s`) : null,
+          iso: data.ISO ? `ISO ${data.ISO}` : null
+        };
       }
     } catch (e) {
       exifData = null;
