@@ -214,7 +214,6 @@ const fotografie = await Promise.all(
         const data = await exifr.parse(buffer, ['Make', 'Model', 'FocalLength', 'FNumber', 'ExposureTime', 'ISO']);
 
         if (data) {
-          // Controlla se la marca (Make) è già inclusa nel nome del modello (Model)
           let cameraName = data.Model || null;
           if (cameraName && data.Make && !cameraName.toLowerCase().includes(data.Make.toLowerCase())) {
             cameraName = `${data.Make} ${cameraName}`.trim();
@@ -354,17 +353,14 @@ const fotografie = await Promise.all(
       btn.addEventListener('click', () => {
         const selectedCategory = btn.getAttribute('data-category');
 
-        // Rimuove lo stile attivo da tutti i bottoni e ripristina quello inattivo
         filterButtons.forEach(b => {
           b.classList.remove('bg-neutral-200', 'text-black', 'border-neutral-200', 'font-medium');
           b.classList.add('border-neutral-800', 'text-neutral-400', 'hover:text-white', 'hover:border-neutral-700', 'bg-neutral-950/40');
         });
 
-        // Applica lo stile attivo esclusivamente al bottone selezionato
         btn.classList.remove('border-neutral-800', 'text-neutral-400', 'hover:text-white', 'hover:border-neutral-700', 'bg-neutral-950/40');
         btn.classList.add('bg-neutral-200', 'text-black', 'border-neutral-200', 'font-medium');
 
-        // Filtra le schede delle foto nella griglia
         photoCards.forEach(card => {
           const cardCategory = card.getAttribute('data-category');
           if (selectedCategory === 'Tutte' || cardCategory === selectedCategory) {

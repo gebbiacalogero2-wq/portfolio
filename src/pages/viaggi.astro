@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const prossimiViaggi = [
+  {
+    meta: "Praga, Repubblica Ceca",
+    periodo: "Dicembre 2026",
+    stato: "Confermato",
+    descrizione: "Atmosfere invernali, architetture gotiche e scatti urbani suggestivi.",
+    badgeClass: "bg-emerald-950/80 text-emerald-400 border-emerald-800/50"
+  },
+  {
+    meta: "Siviglia, Spagna",
+    periodo: "Gennaio 2027",
+    stato: "Confermato",
+    descrizione: "Luce calda andalusa, dettagli moreschi e flamenco.",
+    badgeClass: "bg-emerald-950/80 text-emerald-400 border-emerald-800/50"
+  },
+  {
+    meta: "Cina",
+    periodo: "Primavera 2027",
+    stato: "Da confermare",
+    descrizione: "Paesaggi iconici, tradizioni millenarie e contrasti moderni.",
+    badgeClass: "bg-amber-950/80 text-amber-400 border-amber-800/50"
+  }
+];
+---
+
+<BaseLayout title="Prossimi Viaggi | Calogero Gebbia">
+  <section class="space-y-6 max-w-4xl mx-auto">
+    <div class="flex justify-between items-end pb-4 border-b border-neutral-900">
+      <div>
+        <a href="/" class="text-xs font-mono text-neutral-500 hover:text-white transition-colors mb-2 inline-block">&larr; Torna alla Galleria</a>
+        <h1 class="text-2xl font-light tracking-wide text-neutral-200">Prossimi Viaggi</h1>
+      </div>
+      <span class="text-xs text-neutral-500 uppercase tracking-widest font-mono">Travel Roadmap</span>
+    </div>
+
+    <p class="text-sm text-neutral-400 font-sans">
+      La mia roadmap fotografica. Le mete pianificate e i prossimi progetti di viaggio in arrivo.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+      {prossimiViaggi.map((viaggio) => (
+        <div class="p-6 rounded-sm bg-neutral-950/40 border border-neutral-800/60 flex flex-col justify-between space-y-4 hover:border-neutral-700 transition-colors">
+          <div class="flex justify-between items-start gap-2">
+            <h3 class="text-base font-medium text-white tracking-wide">{viaggio.meta}</h3>
+            <span class={`text-[10px] font-mono px-2.5 py-1 rounded-full border ${viaggio.badgeClass}`}>
+              {viaggio.stato}
+            </span>
+          </div>
+          
+          <p class="text-xs text-neutral-400 leading-relaxed font-sans">
+            {viaggio.descrizione}
+          </p>
+
+          <div class="pt-3 border-t border-neutral-900 text-xs font-mono text-neutral-500 flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <span>{viaggio.periodo}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
